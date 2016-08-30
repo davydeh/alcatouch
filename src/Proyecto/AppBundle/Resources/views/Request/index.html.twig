@@ -1,0 +1,24 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div id="main">
+        <h1>Welcome to AlcaTouch Server App</h1>
+        
+        {% for flashMessage in app.session.flashbag.get('notice') %}
+            <div class="flash-notice">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+        
+        <div class="actions">
+            <a href="{{ path('app_import_file') }}" class="link">Import .INP File to project</a>
+            <a href="{{ path('app_export_project') }}" class="link">Export project to .INP file</a>
+        </div>
+        <!--<a href="#" id="send" class="btn">Send JSON</a>
+        <a href="#" id="load" class="btn">Load JSON</a>
+        <a href="#" id="auth" class="btn">Test User Auth</a>
+        <a href="#" id="list" class="btn">List Dave Projects</a>
+        <a href="#" id="list1" class="btn">List Pepe Projects</a>
+        -->
+    </div>
+{% endblock %}

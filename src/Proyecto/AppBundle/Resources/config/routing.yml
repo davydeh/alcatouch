@@ -1,0 +1,31 @@
+app_homepage:
+    pattern:  /
+    defaults: { _controller: AppBundle:Request:index }
+
+app_save:
+    pattern:  /save
+    defaults: { _controller: AppBundle:Request:save }
+
+app_load:
+    pattern:  /load
+    defaults: { _controller: AppBundle:Request:load }
+
+app_projects:
+    pattern:  /projects
+    defaults: { _controller: AppBundle:Request:listProjects }
+
+app_logincheck:
+    pattern:  /logincheck
+    defaults: { _controller: AppBundle:Request:loginCheck }
+
+upload:
+    pattern: /extension/upload
+    defaults: { _controller: AppBundle:ExtensionManager:upload }
+
+app_import_file:
+    pattern: /extension/import
+    defaults: { _controller: AppBundle:ExtensionManager:saveFile }
+
+app_export_project:
+    pattern: /extension/export
+    defaults: { _controller: AppBundle:ExtensionManager:exportProject }

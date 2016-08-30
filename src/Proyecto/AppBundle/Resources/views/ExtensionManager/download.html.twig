@@ -1,0 +1,30 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}ExtensionManager{% endblock %}
+
+{% block stylesheets %}
+    
+{% endblock %}
+
+{% block body %}
+<h1 class="header">Please select a project to download.</h1>
+
+
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+        
+        {{ form_widget(form.project, {'attr': {'class': 'project'}}) }}
+        
+        {% if projects|length > 0 %}
+        <ul id="projects-list">
+            {% for project in projects %}
+                <li class="list-item" id="{{ project[0] }}">{{ project[1] }} <a href="#" class="delete" style="display: none;"><i class="icon-download-alt"></i></a></li>
+            {% endfor %}
+        </ul>
+        {% else %}
+            <h4 class="empty">No existen proyectos asociados al usuario.</h4>
+        {% endif %}
+
+    {{ form_end(form) }}
+
+{% endblock %}

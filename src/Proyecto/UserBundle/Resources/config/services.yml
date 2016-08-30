@@ -1,0 +1,12 @@
+parameters:
+#    user.example.class: Proyecto\UserBundle\Example
+
+services:
+    proyecto.backend.admin.rol:
+        class: Proyecto\UserBundle\Entity\RolAdmin
+        tags:
+           - { name: sonata.admin, manager_type: orm, group: Usuarios, label: Roles }
+        arguments: [ null, Proyecto\UserBundle\Entity\Rol, SonataAdminBundle:CRUD ]
+#    user.example:
+#        class: %user.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

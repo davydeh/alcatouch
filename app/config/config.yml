@@ -1,0 +1,140 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+
+framework:
+    #esi:             ~
+    translator:      { fallback: %locale% }
+    secret:          %secret%
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: ~
+    form:            ~
+    csrf_protection: ~
+    validation:      { enable_annotations: true }
+    templating:
+        engines: ['twig']
+        #assets_version: SomeVersionScheme
+    default_locale:  "%locale%"
+    trusted_proxies: ~
+    session:         ~
+    fragments:       ~
+
+# Twig Configuration
+twig:
+    debug:            %kernel.debug%
+    strict_variables: %kernel.debug%
+
+# Assetic Configuration
+assetic:
+    debug:          %kernel.debug%
+    use_controller: false
+    bundles:        [ ]
+    #java: /usr/bin/java
+    filters:
+        cssrewrite: ~
+        #closure:
+        #    jar: %kernel.root_dir%/Resources/java/compiler.jar
+        #yui_css:
+        #    jar: %kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar
+
+# Doctrine Configuration
+doctrine:
+    # orm:
+    #     entity_managers:
+    #         default:
+    #             # mappings:
+    #                 # ApplicationSonataUserBundle: ~
+    #                 # SonataUserBundle: ~
+    #                 FOSUserBundle: ~
+    dbal:
+        driver:   %database_driver%
+        host:     %database_host%
+        port:     %database_port%
+        dbname:   %database_name%
+        user:     %database_user%
+        password: %database_password%
+        charset:  UTF8
+        types:
+            json: Sonata\Doctrine\Types\JsonType
+        # if using pdo_sqlite as your database driver, add the path in parameters.yml
+        # e.g. database_path: %kernel.root_dir%/data/data.db3
+        # path:     %database_path%
+
+    orm:
+        auto_generate_proxy_classes: %kernel.debug%
+        auto_mapping: true
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport: %mailer_transport%
+    host:      %mailer_host%
+    username:  %mailer_user%
+    password:  %mailer_password%
+    spool:     { type: memory }
+
+#Configuracion del proyecto Sonata
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        sonata.admin.block.admin_list:
+            contexts: [admin]
+sonata_admin:
+    title:      Sonata Project
+    dashboard:
+        blocks:
+           - { position: left, type: sonata.admin.block.admin_list }
+# sonata_user:
+#         security_acl:           false
+
+#         manager_type: orm # Can be orm for mongodb
+
+#         table:
+#             user_group: "usuario_grupo"
+
+#         # impersonating:
+#         #     route:                page_slug
+#         #     parameters:           { path: / }
+
+        # class:                  # Entity Classes
+        #     user:               Proyecto\UserBundle\Entity\User
+        #     group:              Proyecto\UserBundle\Entity\Rol
+
+        # admin:                  # Admin Classes
+        #     user:
+        #         class:          Sonata\UserBundle\Admin\Entity\UserAdmin
+        #         controller:     SonataAdminBundle:CRUD
+        #         translation:    SonataUserBundle
+
+        #     group:
+        #         class:          Sonata\UserBundle\Admin\Entity\GroupAdmin
+        #         controller:     SonataAdminBundle:CRUD
+        #         translation:    SonataUserBundle
+
+        # profile:  # Profile Form (firstname, lastname, etc ...)
+        #     form:
+        #         type:               sonata_user_profile
+        #         handler:            sonata.user.profile.form.handler.default
+        #         name:               sonata_user_profile_form
+        #         validation_groups:  [Profile]
+
+#Configuracion del FOSUserBundle
+# fos_user:
+#     db_driver:      orm # can be orm or odm
+#     firewall_name:  main
+#     user_class:     Application\Sonata\UserBundle\Entity\User
+#     group:
+#         group_class: Application\Sonata\UserBundle\Entity\Group
+#     profile:  # Authentication Form
+#         form:
+#             type:               fos_user_profile
+#             handler:            fos_user.profile.form.handler.default
+#             name:               fos_user_profile_form
+#             validation_groups:  [Authentication]
+#Configuracion del FOSUser sin integrarlo con el Sonata
+fos_user:
+    db_driver: orm # otros valores válidos son 'mongodb', 'couchdb' and 'propel'
+    firewall_name: ldap #Aqui va el nombre del firewall. Puede ser el de FOS_user si no quieres trabajar con el LDAP y si no entonces usa active_directory
+    user_class: Proyecto\UserBundle\Entity\User
+    group:
+        group_class: Proyecto\UserBundle\Entity\Rol
